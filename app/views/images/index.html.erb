@@ -1,14 +1,14 @@
 
-<% if @image.photo.attached? %>
-  <%= image_tag @image.photo %>
-<% end %>
-
-<% if @image.photo.attached? %>
-  <ul>
-    <% @image.photo.each do |photo| %>
-    <li>  <%= image_tag @image.photo %> </li>
+<% if @images.any? %>
+   <ul>
+    <% @images.each do |image| %>
+   <% if image.photo.attached? %>
+    <li>  <%= link_to image_tag(image.photo), image_path(image)  %></li>
     <% end %>
+  <% end %>
+    
   </ul>
+  
 <% else %>
 <p>No images hurrr</p>
 <% end %>

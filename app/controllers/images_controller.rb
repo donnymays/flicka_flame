@@ -1,14 +1,18 @@
 class ImagesController < ApplicationController
-  skip_before_action :authenticate_user!, :only => [:index]
+  before_action :only => [:new, :destroy] do
+    redirect_to new_user_session_path unless current_user && current_user.admin
+    
+  end
+
 
   def index
       if params[:user_id]
         @user = current_user
         @image = @user.images.new
-        @images = @user.images
+        @images = Image.all
       else
-        @user = User.find(params[:id])
-        @images = @user.images
+        # @user = User.find(params[:id])
+        @images = Image.all
       end
   end
 
@@ -39,7 +43,7 @@ class ImagesController < ApplicationController
       @users = User.all
     end
     if params[:user_id]
-      @user = User.find(params[:user_id])
+      @user = @image.user
     end
   end
 
@@ -60,7 +64,6 @@ class ImagesController < ApplicationController
       redirect_to user_path(@image.user)
     end
   end
-
 
   private
     def image_params
