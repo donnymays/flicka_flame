@@ -1,0 +1,8 @@
+<br>
+<% if @image.photo.attached? %>
+  <%= image_tag @image.photo %>
+<% end %>
+
+<p><%= link_to "Delete image", user_image_path(@user, @image),
+                        :data => {:confirm => "Are you sure?",
+                                       :method => "delete"} %></p>

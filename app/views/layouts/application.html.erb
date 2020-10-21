@@ -4,12 +4,24 @@
     <title>RailsFlickr</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+  <div class= "container">
+  <br>
+    <% if current_user %>
+      <a href="/users/sign_out" data-method="delete" value="<%= destroy_user_session_path%>">Sign Out</a> |
+      <a href="/users/edit" value="<%= edit_user_registration_path %>">Edit Account</a>
+    <% else %>
+      <%= link_to "Sign in / Sign up", new_user_session_path %>      
+    <% end %>
+
+    <%= flash[:notice] %>
+    <%= flash[:alert] %>
     <%= yield %>
+  </div>
   </body>
 </html>
+<%# destroy_user_session_path, :method => :delete %>

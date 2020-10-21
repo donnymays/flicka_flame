@@ -1,0 +1,18 @@
+<% if @user %>
+<h1> Welcome <%= @user.name %>, Check out this spot <h2>
+<% end %>
+
+<% if @user.images.any? %>
+  <ul>
+    <% @user.images.each do |image| %>
+      <h3><%= link_to image.title, user_image_path(@user, image) %>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There are no images to display.<p>
+<% end %>
+<hr>
+
+<%= link_to ">AdD a PhOtO uP iN hUrR<", new_user_image_path(@user, @image)  %>
+
+

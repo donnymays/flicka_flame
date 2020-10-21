@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users
-    root to: 'landing#index'
+  root to: 'users#show' 
+  devise_for :users   
+  resources :users do
+    resources :images
+    end
 end
